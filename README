@@ -1,0 +1,10 @@
+open terminal
+# run ./imroot firstly, only once is enough
+run ./startup.sh, wait for line as "x7_manage/server/mq_receiver.py"
+start browser with url 127.0.0.1:8000/init
+set correct value, especially interface, like "eth0"
+
+click submit and have a look at the terminal for the output. 
+It will install everything that server need.
+You will see msg like "stack.sh completed in $SECONDS seconds." when success
+
