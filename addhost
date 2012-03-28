@@ -1,0 +1,19 @@
+#!/bin/bash -x
+
+#host cloudnode-1 {hardware ethernet 5c:26:0a:33:0d:71;fixed-address 192.168.1.4;}
+
+if [ $# != 2 ]; then
+    echo "usage: $0 macaddr ipaddr"
+    exit 1
+fi
+
+lasthost=`grep "cloudnode-" /etc/dhcp/dhcpd.conf | tail -n 1 |  awk '{ print $2}' `
+
+x=`echo $lasthost | sed "s|cloudnode-||"`
+let "y = x+1"
+
+# need root permission
+echo "host cloudnode-$y {hardware ethernet $1;fixed-address $2;" >> /etc/dhcp/dhcpd.conf
+/etc/init.d/isc-dhcp-server restart
+fai-chboot -FIv $2
+chmod +r /srv/tftp/fai/

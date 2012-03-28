@@ -44,4 +44,4 @@ x7_start/server/mq_receiver.py &
 echo "open browser with url http://127.0.0.1:8000/init"
 cd x7_start
 #firefox 127.0.0.1:8000/init
-python manage.py runserver 2>/dev/null 1>/dev/null
+python manage.py runserver 0.0.0.0:8000 2>/dev/null 1>/dev/null
