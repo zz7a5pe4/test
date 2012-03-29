@@ -10,4 +10,4 @@ cd $X7WORKDIR/x7
 cd $X7WORKDIR/x7/devstack
 ./init.sh srv
 ./stack.sh
-exit 1
+exit 0
