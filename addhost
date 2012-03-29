@@ -13,7 +13,7 @@ x=`echo $lasthost | sed "s|cloudnode-||"`
 let "y = x+1"
 
 # need root permission
-echo "host cloudnode-$y {hardware ethernet $1;fixed-address $2;" >> /etc/dhcp/dhcpd.conf
+echo "host cloudnode-$y {hardware ethernet $1;fixed-address $2;}" >> /etc/dhcp/dhcpd.conf
 /etc/init.d/isc-dhcp-server restart
 fai-chboot -FIv $2
 chmod +r /srv/tftp/fai/

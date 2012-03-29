@@ -1,0 +1,27 @@
+#!/usr/bin/python
+
+import sys
+from x7_start.server.x7_mq import MqClient
+
+
+
+
+def main():
+	print "in main"
+
+	s2wDict = { 'X7_Q':'X7_Q_HS2W', 'X7_E':'X7_E_HS2W', 'X7_RK':'X7_PK_HS2W' }
+	client = MqClient( s2wDict )
+	client.connect()  
+
+	#client.send({"type":sys.argv[1], "mesg":msg})
+	
+	
+	while True:
+		data=sys.stdin.readline().rstrip().split(" ")
+		if "cloudnode-" in data[0] :
+			
+	client.close()
+
+
+if __name__ == "__main__" :
+	main()
