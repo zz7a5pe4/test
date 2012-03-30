@@ -4,3 +4,4 @@ sources.list
 x7
 x7_fai
 x7_start
+*.pyc

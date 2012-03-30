@@ -14,6 +14,10 @@ let "y = x+1"
 
 # need root permission
 echo "host cloudnode-$y {hardware ethernet $1;fixed-address $2;}" >> /etc/dhcp/dhcpd.conf
+
+echo "$2    cloudnode-$y" >> /etc/hosts
+
 /etc/init.d/isc-dhcp-server restart
-fai-chboot -FIv $2
+#fai-chboot -FIv $2
+fai-chboot -Iv -f verbose,sshd,createvt,reboot $2
 chmod +r /srv/tftp/fai/
