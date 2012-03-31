@@ -22,3 +22,9 @@ echo "$2    cloudnode-$y" >> /etc/hosts
 #fai-chboot -FIv $2
 fai-chboot -Iv -f verbose,sshd,createvt,reboot $2
 chmod +r /srv/tftp/fai/
+
+GATEWAY=$(route -n | grep 'UG[ \t]' | awk '{print $2}')
+cp -f interface.template interface.$2
+sed -i "s|%NODEADDR%|$2|g" interface.$2
+sed -i "s|%GATEWAY%|$GATEWAY|g" interface.$2
+mv interface.$2 /srv/fai/nfsroot/live/filesystem.dir/root/
