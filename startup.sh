@@ -20,6 +20,10 @@ sudo cp -f $CONFDIR/etc/approx/approx.conf /etc/approx/approx.conf
 sudo inetd
 sudo apt-get update
 
+sudo apt-get install -y ntp
+sudo sed -i 's/server ntp.ubuntu.com/serverntp.ubuntu.com\nserver 127.127.1.0\nfudge 127.127.1.0 stratum 10/g' /etc/ntp.conf
+sudo service ntp restar
+
 # installn dependent package
 sudo apt-get install -y --assume-yes git rabbitmq-server  python-kombu python-django
 
