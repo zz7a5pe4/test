@@ -3,7 +3,7 @@
 import sys
 import threading
 import subprocess
-from x7_start.server.x7_mq import MqClient
+from x7_start.server.x7_mq import MqClient,MqServer
 import ping
 import time
 
