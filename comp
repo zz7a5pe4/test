@@ -1,4 +1,7 @@
 #!/bin/bash
 
+#/bin/bash
+
+HOSTADDR=$(ifconfig | grep -A1 eth0 | grep 'inet addr:' |cut -d: -f2 | awk '{ print $1}')
 rm -f ~/.ssh/known_hosts
-ssh -o StrictHostKeyChecking=no -l stack $1 "cd /home/stack/x7 && ./mk client && cd /home/stack/x7/devstack && INTERFACE=eth0 ./init.sh cln && ./stack_comp.sh"
+ssh -o StrictHostKeyChecking=no -l stack $1 "cd /home/stack/x7 && ./mk client && cd /home/stack/x7/devstack && SERVERADDR=$HOSTADDR INTERFACE=eth0 ./init.sh cln && ./stack_comp.sh"
