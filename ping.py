@@ -150,11 +150,11 @@ class Ping(object):
 	sys.exit(0)
 	
     def print_failed(self):
-        #print("Request timed out.")
-	sys.exit(-1)
+        print("Request timed out.")
+	
 
     def print_exit(self):
-        #print("\n----%s PYTHON PING Statistics----" % (self.destination))
+        print("\n----%s PYTHON PING Statistics----" % (self.destination))
 
         lost_count = self.send_count - self.receive_count
         #print("%i packets lost" % lost_count)
@@ -354,7 +354,8 @@ if __name__ == '__main__':
     if len(sys.argv) == 1:
         print "DEMO"
     elif len(sys.argv) == 2:
-        verbose_ping(sys.argv[1],count=2**32)
+        verbose_ping(sys.argv[1],count=1024)
     else:
         print "Error: call ./ping.py domain.tld"
+    sys.exit(-1)
 

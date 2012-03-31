@@ -5,6 +5,7 @@ import threading
 import subprocess
 from x7_start.server.x7_mq import MqClient
 import ping
+import time
 
 #{"type":"log", "mesg":"success", "IP": "172.16.1.105"}
 # {"type":"prog", "mesg":"40", "IP": "172.16.1.105"}
@@ -18,19 +19,27 @@ class InstallTask(threading.Thread):
 	self.host = host
 
     def run(self):
-	print "pinging" + self.host
-	p = subprocess.Popen(('sudo ./ping.py ' + self.host).split());
+	time.sleep(5)
+	print "pinging " + self.host
+	p = subprocess.Popen(('sudo ./ping.py ' + self.host).split(),
+			     shell=False,
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE)
+	stdout, stderr = p.communicate()
 	if p.returncode != 0:
 		print "pinging failed"
 		return;
 	print self.host
-        p = subprocess.Popen('./comp'.split(),
+	time.sleep(10)
+        p = subprocess.Popen(('./comp '+ self.host).split(),
 			     shell=False,
                              stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE)
 
         self.stdout, self.stderr = p.communicate()
 	s2wDict = { 'X7_Q':'X7_Q_HS2W', 'X7_E':'X7_E_HS2W', 'X7_RK':'X7_PK_HS2W' }
+	print self.stdout
+	print self.stderr
 	client = MqClient( s2wDict )
 	client.connect() 
 	client.send({"type":"prog", "mesg":"100", "hostname":self.host})
@@ -49,7 +58,7 @@ def main():
 	
 	while True:
 		data=sys.stdin.readline().rstrip().split(" ")
-		
+
 		if "cloudnode-" in data[0] :
 			client.send({"type":"log", "mesg":" ".join(data[1:]), "hostname":data[0]})
 			print " ".join(data)
