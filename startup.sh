@@ -34,7 +34,7 @@ git clone git://github.com/zz7a5pe4/x7_fai.git || true
 
 # create id_rsa for current user
 ssh-keygen -P "" -f ~/.ssh/id_rsa || true
-
+ssh-add   ~/.ssh/id_rsa
 # setup rabbitmq
 sudo rabbitmqctl  -q change_password guest guest
 
