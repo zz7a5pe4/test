@@ -32,7 +32,10 @@ git clone git://github.com/zz7a5pe4/x7_start.git || true
 
 # clone x7 stack from github
 git clone git://github.com/zz7a5pe4/x7.git || true 
-
+cd x7
+git fetch git://github.com/zz7a5pe4/x7.git demo_mig
+git checkout demo_mig
+cd ..
 # clone x7 fai from github
 git clone git://github.com/zz7a5pe4/x7_fai.git || true
 
